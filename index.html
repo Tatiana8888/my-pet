@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f7f2">
     <title>My Pet — thoughtful care, every day</title>
+    <meta id="app-description" name="description" content="All your pet's medications, vaccinations, and grooming in one caring, easy-to-use place.">
+    <meta property="og:title" content="My Pet — thoughtful care, every day">
+    <meta property="og:description" content="A calm, colorful care hub for pets and the people who love them.">
+    <meta property="og:image" content="https://tatiana8888.github.io/my-pet/assets/hero-pets.svg">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,72 +18,74 @@
   <body>
     <div class="app-shell">
       <aside class="sidebar">
-        <a class="brand" href="#" aria-label="My Pet home">
+        <a class="brand" href="#" aria-label="My Pet home" data-i18n-aria="home">
           <span class="brand-mark" aria-hidden="true">✳</span>
           <span>my<span class="brand-highlight">pet</span></span>
         </a>
-        <div class="side-label">YOUR SPACE</div>
-        <nav class="main-nav" aria-label="Main navigation">
-          <button class="nav-link active" data-view="overview"><span class="nav-icon">⌂</span>Overview</button>
-          <button class="nav-link" data-view="medications"><span class="nav-icon">✚</span>Medications<span class="nav-count" id="med-count">0</span></button>
-          <button class="nav-link" data-view="records"><span class="nav-icon">♡</span>Health records</button>
+        <div class="side-label" data-i18n="yourSpace">YOUR SPACE</div>
+        <nav class="main-nav" aria-label="Main navigation" data-i18n-aria="mainNavigation">
+          <button class="nav-link active" data-view="overview"><span class="nav-icon">⌂</span><span data-i18n="overview">Overview</span></button>
+          <button class="nav-link" data-view="medications"><span class="nav-icon">✚</span><span data-i18n="medications">Medications</span><span class="nav-count" id="med-count">0</span></button>
+          <button class="nav-link" data-view="records"><span class="nav-icon">♡</span><span data-i18n="healthRecords">Health records</span></button>
+          <button class="nav-link" data-view="guide"><span class="nav-icon">✦</span><span data-i18n="howItWorks">How it works</span></button>
         </nav>
         <div class="pet-list-heading">
-          <span class="side-label">MY PETS</span>
-          <button id="add-pet-quick" class="icon-button add-small" aria-label="Add a pet">+</button>
+          <span class="side-label" data-i18n="myPets">MY PETS</span>
+          <button id="add-pet-quick" class="icon-button add-small" aria-label="Add a pet" data-i18n-aria="addPet">+</button>
         </div>
         <div id="pet-list" class="pet-list"></div>
         <div class="sidebar-note">
           <span class="note-spark">✦</span>
-          <p>Little routines make<br>for a lifetime of love.</p>
+          <p data-i18n="sidebarNote">Little routines make<br>for a lifetime of love.</p>
         </div>
         <div class="profile-chip">
           <div class="profile-avatar">A</div>
-          <div><strong>Alex Morgan</strong><span>Pet parent</span></div>
+          <div><strong data-i18n="profileName">Alex Morgan</strong><span data-i18n="petParent">Pet parent</span></div>
           <span class="more-dots">···</span>
         </div>
       </aside>
 
       <main class="main-content">
         <header class="topbar">
-          <div class="breadcrumbs">My space <span>/</span> <strong id="crumb-current">Overview</strong></div>
+          <div class="breadcrumbs"><span data-i18n="mySpace">My space</span><span>/</span><strong id="crumb-current">Overview</strong></div>
           <div class="topbar-actions">
             <div class="today-label"><span class="calendar-icon">▦</span><span id="today-date"></span></div>
-            <button class="avatar-button" aria-label="Profile">A</button>
+            <label class="language-control"><span aria-hidden="true">◎</span><span class="visually-hidden" data-i18n="chooseLanguage">Choose language</span>
+              <select id="language-picker" aria-label="Choose language">
+                <option value="en">English</option><option value="ru">Русский</option><option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option>
+              </select>
+            </label>
+            <a class="download-link" href="https://github.com/Tatiana8888/my-pet/releases/latest/download/my-pet-android.apk" aria-label="Get Android app" data-i18n-aria="downloadApp"><span aria-hidden="true">↓</span><span data-i18n="downloadApp">Get Android app</span></a>
+            <button class="avatar-button" aria-label="Profile" data-i18n-aria="profile">A</button>
           </div>
         </header>
         <div class="page-wrap">
-          <section class="page-heading">
+          <section class="page-heading" id="page-heading">
             <div>
               <p class="eyebrow" id="greeting">A GOOD DAY TOGETHER</p>
               <h1 id="page-title">Good morning, Alex <span class="wave">✦</span></h1>
               <p class="heading-subtitle" id="page-subtitle">A little care goes a long way. Here's what's happening today.</p>
             </div>
-            <button class="primary-button" id="add-care-button"><span>+</span> Add care record</button>
+            <button class="primary-button" id="add-care-button"><span>+</span><span data-i18n="addCareRecord">Add care record</span></button>
           </section>
 
           <section class="pet-hero" id="pet-hero">
             <div class="hero-copy">
-              <div class="hero-tag"><span class="live-dot"></span> YOUR HAPPY PLACE</div>
-              <h2>Every tail wag<br>starts with <em>good care.</em></h2>
-              <p>Keep all the little things that make<br>your pet feel their best, in one place.</p>
-              <button class="hero-button" data-view="records">Explore health records <span>→</span></button>
+              <div class="hero-tag"><span class="live-dot"></span><span data-i18n="heroTag">YOUR HAPPY PLACE</span></div>
+              <h2><span data-i18n="heroTitle">Every tail wag<br>starts with <em>good care.</em></span></h2>
+              <p data-i18n="heroDescription">Keep all the little things that make<br>your pet feel their best, in one place.</p>
+              <button class="hero-button" data-view="records"><span data-i18n="exploreRecords">Explore health records</span><span>→</span></button>
             </div>
             <div class="hero-illustration" aria-hidden="true">
-              <div class="sun-disc"></div>
-              <div class="hero-plant plant-left">⌁</div>
-              <div class="hero-pet"><span class="pet-ear left"></span><span class="pet-ear right"></span><span class="pet-face">•ᴥ•</span><span class="pet-collar"></span></div>
-              <div class="hero-plant plant-right">♧</div>
-              <div class="hero-ground"></div>
-              <span class="floating-heart">♥</span><span class="floating-star">✦</span>
+              <img src="assets/hero-pets.svg" alt="" width="420" height="250">
             </div>
             <div class="hero-pagination"><i class="selected"></i><i></i><i></i></div>
           </section>
 
           <section class="section-block" id="overview-section">
             <div class="section-heading">
-              <div><p class="eyebrow">YOUR LITTLE ROUTINES</p><h2>Care at a glance</h2></div>
-              <button class="text-button" data-view="medications">See all care <span>→</span></button>
+              <div><p class="eyebrow" data-i18n="yourRoutines">YOUR LITTLE ROUTINES</p><h2 data-i18n="careAtGlance">Care at a glance</h2></div>
+              <button class="text-button" data-view="medications"><span data-i18n="seeAllCare">See all care</span><span>→</span></button>
             </div>
             <div class="stat-grid" id="stats-grid"></div>
           </section>
@@ -86,15 +93,15 @@
           <section class="content-grid" id="overview-content">
             <div class="panel today-panel">
               <div class="panel-heading">
-                <div><p class="eyebrow">ONE DAY AT A TIME</p><h3>Today's care</h3></div>
+                <div><p class="eyebrow" data-i18n="oneDayAtTime">ONE DAY AT A TIME</p><h3 data-i18n="todaysCare">Today's care</h3></div>
                 <span class="date-pill" id="short-date"></span>
               </div>
               <div id="today-care-list" class="care-list"></div>
             </div>
             <div class="panel upcoming-panel">
               <div class="panel-heading">
-                <div><p class="eyebrow">A LITTLE HEADS-UP</p><h3>Coming up</h3></div>
-                <button class="icon-button more-button" aria-label="More upcoming items">···</button>
+                <div><p class="eyebrow" data-i18n="littleHeadsUp">A LITTLE HEADS-UP</p><h3 data-i18n="comingUp">Coming up</h3></div>
+                <button class="icon-button more-button" aria-label="More upcoming items" data-i18n-aria="moreUpcoming">···</button>
               </div>
               <div id="upcoming-list" class="upcoming-list"></div>
             </div>
@@ -102,22 +109,46 @@
 
           <section class="panel records-panel" id="records-section" hidden>
             <div class="panel-heading records-header">
-              <div><p class="eyebrow">EVERY VISIT, EVERY MILESTONE</p><h3>Health records</h3><p class="panel-description">Vaccinations and grooming, thoughtfully kept together.</p></div>
-              <div class="record-actions"><button class="secondary-button" data-add-type="vaccination">+ Vaccination</button><button class="secondary-button" data-add-type="grooming">+ Grooming</button></div>
+              <div><p class="eyebrow" data-i18n="visitMilestones">EVERY VISIT, EVERY MILESTONE</p><h3 data-i18n="healthRecords">Health records</h3><p class="panel-description" data-i18n="recordsDescription">Vaccinations and grooming, thoughtfully kept together.</p></div>
+              <div class="record-actions"><button class="secondary-button" data-add-type="vaccination"><span data-i18n="addVaccination">+ Vaccination</span></button><button class="secondary-button" data-add-type="grooming"><span data-i18n="addGrooming">+ Grooming</span></button></div>
             </div>
-            <div class="record-tabs"><button class="record-tab active" data-record-tab="all">All records</button><button class="record-tab" data-record-tab="vaccination">Vaccinations</button><button class="record-tab" data-record-tab="grooming">Grooming</button></div>
+            <div class="record-tabs"><button class="record-tab active" data-record-tab="all" data-i18n="allRecords">All records</button><button class="record-tab" data-record-tab="vaccination" data-i18n="vaccinations">Vaccinations</button><button class="record-tab" data-record-tab="grooming" data-i18n="grooming">Grooming</button></div>
             <div id="records-list" class="records-list"></div>
           </section>
 
           <section class="panel medications-panel" id="medications-section" hidden>
             <div class="panel-heading records-header">
-              <div><p class="eyebrow">STEADY CARE, SIMPLIFIED</p><h3>Medications</h3><p class="panel-description">A clear routine for the treatments that keep them feeling good.</p></div>
-              <button class="primary-button compact-button" data-add-type="medication"><span>+</span> Add medication</button>
+              <div><p class="eyebrow" data-i18n="steadyCare">STEADY CARE, SIMPLIFIED</p><h3 data-i18n="medications">Medications</h3><p class="panel-description" data-i18n="medicationsDescription">A clear routine for the treatments that keep them feeling good.</p></div>
+              <button class="primary-button compact-button" data-add-type="medication"><span>+</span><span data-i18n="addMedication">Add medication</span></button>
             </div>
             <div class="med-summary" id="med-summary"></div>
             <div id="medications-list" class="medications-list"></div>
           </section>
-          <footer class="footer-note"><span>✦</span> Made with love for the ones with paws.</footer>
+          <section class="guide-section" id="guide-section" hidden>
+            <div class="guide-hero">
+              <div class="guide-hero-copy">
+                <p class="eyebrow" data-i18n="careMadeSimple">PET CARE, MADE SIMPLE</p>
+                <h2 data-i18n="guideTitle">More happy moments.<br><em>Less to remember.</em></h2>
+                <p data-i18n="guideIntro">One gentle place for the little routines that help your best friend feel their best.</p>
+                <a class="guide-download" href="https://github.com/Tatiana8888/my-pet/releases/latest/download/my-pet-android.apk"><span>↓</span><span data-i18n="downloadAndroid">Download for Android</span></a>
+                <span class="download-note" data-i18n="downloadNote">Free · private on your device · works offline</span>
+              </div>
+              <img src="assets/care-guide.svg" alt="" width="440" height="290">
+            </div>
+            <div class="guide-section-heading"><p class="eyebrow" data-i18n="smallSteps">A FEW SMALL STEPS</p><h3 data-i18n="howUse">How to use My Pet</h3><p data-i18n="howUseIntro">Set up in a minute. Feel more on top of care every day.</p></div>
+            <div class="steps-grid">
+              <article class="step-card"><span class="step-number">01</span><img src="assets/step-profile.svg" alt="" width="112" height="92"><h4 data-i18n="stepOneTitle">Add your pet</h4><p data-i18n="stepOneText">Create a profile for each furry family member. Switch pets anytime.</p></article>
+              <article class="step-card"><span class="step-number">02</span><img src="assets/step-medication.svg" alt="" width="112" height="92"><h4 data-i18n="stepTwoTitle">Set a care routine</h4><p data-i18n="stepTwoText">Add medicine and its schedule, then tap the check when a dose is given.</p></article>
+              <article class="step-card"><span class="step-number">03</span><img src="assets/step-records.svg" alt="" width="112" height="92"><h4 data-i18n="stepThreeTitle">Keep dates close</h4><p data-i18n="stepThreeText">Save vaccine and grooming visits. Upcoming dates appear on your home screen.</p></article>
+            </div>
+            <div class="features-grid">
+              <article class="feature-card"><span class="feature-icon mint">✚</span><div><h4 data-i18n="featureMedsTitle">Medication, made manageable</h4><p data-i18n="featureMedsText">See each dose, follow the daily routine, and keep a simple completion history.</p></div></article>
+              <article class="feature-card"><span class="feature-icon sky">♡</span><div><h4 data-i18n="featureRecordsTitle">Every important record</h4><p data-i18n="featureRecordsText">Keep vaccinations, clinic details, and grooming visits together by pet.</p></div></article>
+              <article class="feature-card"><span class="feature-icon peach">◷</span><div><h4 data-i18n="featureRemindersTitle">A heads-up before it's due</h4><p data-i18n="featureRemindersText">See upcoming vaccination and grooming dates at a glance. No account needed.</p></div></article>
+            </div>
+            <div class="privacy-note"><span>✦</span><p><strong data-i18n="privacyTitle">Your pet's care stays yours.</strong><br><span data-i18n="privacyText">This app keeps records in your browser or Android device. It doesn't send them to a server.</span></p></div>
+          </section>
+          <footer class="footer-note"><span>✦</span><span data-i18n="footerNote">Made with love for the ones with paws.</span></footer>
         </div>
       </main>
     </div>
@@ -126,10 +157,10 @@
       <form id="entry-form" method="dialog">
         <div class="dialog-top">
           <div><p class="eyebrow" id="dialog-eyebrow">A LITTLE MORE LOVE</p><h2 id="dialog-title">Add a care record</h2></div>
-          <button type="button" class="icon-button close-dialog" aria-label="Close dialog">×</button>
+          <button type="button" class="icon-button close-dialog" aria-label="Close dialog" data-i18n-aria="closeDialog">×</button>
         </div>
         <div id="dialog-fields" class="dialog-fields"></div>
-        <div class="dialog-actions"><button type="button" class="secondary-button cancel-dialog">Cancel</button><button type="submit" class="primary-button">Save record</button></div>
+        <div class="dialog-actions"><button type="button" class="secondary-button cancel-dialog" data-i18n="cancel">Cancel</button><button type="submit" class="primary-button" data-i18n="saveRecord">Save record</button></div>
       </form>
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>

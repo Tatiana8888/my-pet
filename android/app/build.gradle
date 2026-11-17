@@ -1,0 +1,45 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.mypet.app"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.mypet.app"
+        minSdk 23
+        targetSdk 34
+        versionCode providers.gradleProperty("appVersionCode").getOrElse("1").toInteger()
+        versionName providers.gradleProperty("appVersionName").getOrElse("1.0.0")
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        main.assets.srcDir(layout.buildDirectory.dir("generated/webAssets"))
+    }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            outputFileName = "my-pet-android.apk"
+        }
+    }
+}
+
+tasks.register("copyWebApp", Sync) {
+    from(rootProject.projectDir.parentFile) {
+        include "index.html", "app.js", "styles.css"
+        include "assets/**"
+    }
+    into(layout.buildDirectory.dir("generated/webAssets/www"))
+}
+
+tasks.named("preBuild").configure {
+    dependsOn(tasks.named("copyWebApp"))
+}
