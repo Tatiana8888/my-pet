@@ -31,7 +31,7 @@ jobs:
       - name: Prepare the web app
         run: |
           mkdir -p publish/assets
-          cp index.html app.js styles.css publish/
+          cp index.html app.js styles.css robots.txt sitemap.xml publish/
           cp assets/*.svg publish/assets/
 
       - name: Upload website

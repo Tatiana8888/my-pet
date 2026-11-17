@@ -8,7 +8,9 @@ A calm, colorful care hub for pets and the people who love them. Track medicatio
 
 Open the [live web app](https://tatiana8888.github.io/my-pet/), [`index.html`](index.html) in a modern browser, or download the Android app from the latest [My Pet release](https://github.com/Tatiana8888/my-pet/releases/latest/download/my-pet-android.apk). The web app needs no build step. The Android app bundles the same interface and works offline.
 
-From **How it works**, follow the illustrated three-step guide: add a pet, create a medication routine, then keep vaccination and grooming dates close at hand. In the care dashboard, check off doses when given and review upcoming care. Records and language preference stay in browser storage or on the Android device; no account or server is used.
+On a first visit, choose a language, add a pet profile, then follow the illustrated guide to create a medication routine and keep vaccination and grooming dates close at hand. Returning users go straight to their saved care dashboard. Check off doses when given and review upcoming care. Records and language preference stay in browser storage or on the Android device; no account or server is used.
+
+The public site provides language-specific `?lang=` links, localized page and sharing metadata, canonical and `hreflang` links, a sitemap, and a robots policy. Its schema.org data describes only the multilingual website; it does not claim ratings or store availability.
 
 ## Build Android
 

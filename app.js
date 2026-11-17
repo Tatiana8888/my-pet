@@ -1,10 +1,19 @@
 const STORAGE_KEY = "mypet-care-data-v1";
 const LANGUAGE_KEY = "mypet-language-v1";
+const PUBLIC_SITE_URL = "https://tatiana8888.github.io/my-pet/";
 const LANGUAGES = ["en", "ru", "es", "fr", "de"];
 const LOCALE_TAGS = { en: "en-US", ru: "ru-RU", es: "es-ES", fr: "fr-FR", de: "de-DE" };
+const SOCIAL_LOCALES = { en: "en_US", ru: "ru_RU", es: "es_ES", fr: "fr_FR", de: "de_DE" };
 const messages = Object.fromEntries([
   ["yourSpace", "YOUR SPACE", "ВАШЕ ПРОСТРАНСТВО", "TU ESPACIO", "VOTRE ESPACE", "DEIN BEREICH"],
-  ["metaDescription", "All your pet's medications, vaccinations, and grooming in one caring, easy-to-use place.", "Лекарства, прививки и груминг питомца — в одном удобном месте.", "Medicamentos, vacunas y peluquería de tu mascota en un solo lugar.", "Médicaments, vaccins et toilettage de votre animal au même endroit.", "Medikamente, Impfungen und Pflege für dein Tier an einem Ort."],
+  ["metaTitle", "My Pet — thoughtful pet care, every day", "My Pet — забота о питомцах каждый день", "My Pet — cuidado para mascotas cada día", "My Pet — prendre soin de son animal chaque jour", "My Pet — liebevolle Tierpflege jeden Tag"],
+  ["metaDescription", "Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.", "Храните расписание лекарств, данные о прививках и даты груминга питомца в одном удобном приватном приложении.", "Organiza los medicamentos, las vacunas y las citas de peluquería de tu mascota en un espacio privado y sencillo.", "Réunissez les traitements, les vaccins et les rendez-vous de toilettage de votre animal dans un espace privé et simple.", "Medikamentenpläne, Impfungen und Pflegetermine für dein Tier an einem privaten, übersichtlichen Ort."],
+  ["onboardingEyebrow", "A FRESH START FOR YOUR FAMILY", "ЗАБОТА О ПИТОМЦЕ НАЧИНАЕТСЯ ЗДЕСЬ", "UN NUEVO COMIENZO PARA VUESTRA FAMILIA", "UN NOUVEAU DÉPART POUR VOTRE FAMILLE", "EIN LIEBEVOLLER START FÜR DEINE FAMILIE"],
+  ["onboardingTitle", "A happier care routine starts with your pet.", "Забота о питомце начинается с его профиля.", "Una rutina de cuidados más fácil empieza con tu mascota.", "Une routine de soins plus sereine commence avec votre animal.", "Eine entspanntere Pflegeroutine beginnt mit deinem Tier."],
+  ["onboardingDescription", "Create a profile to keep medications, vaccinations, and grooming dates in one calm, easy-to-use place.", "Создайте профиль питомца, чтобы хранить лекарства, прививки и даты груминга в одном удобном месте.", "Crea un perfil para reunir medicamentos, vacunas y citas de peluquería en un solo lugar.", "Créez un profil pour réunir médicaments, vaccins et rendez-vous de toilettage au même endroit.", "Lege ein Profil an, um Medikamente, Impfungen und Pflegetermine an einem Ort zu organisieren."],
+  ["onboardingLanguageHint", "Choose your language above, then add your first pet to get started.", "Выберите язык выше, затем добавьте первого питомца.", "Elige el idioma arriba y añade a tu primera mascota para empezar.", "Choisissez votre langue ci-dessus, puis ajoutez votre premier animal.", "Wähle oben deine Sprache und füge dann dein erstes Tier hinzu."],
+  ["addFirstPet", "Add your first pet", "Добавить первого питомца", "Añadir a tu primera mascota", "Ajouter votre premier animal", "Erstes Tier hinzufügen"],
+  ["onboardingGuide", "See how it works", "Как это работает", "Ver cómo funciona", "Voir comment ça marche", "So funktioniert's"],
   ["home", "My Pet home", "Главная My Pet", "Inicio de My Pet", "Accueil My Pet", "My Pet-Startseite"],
   ["mainNavigation", "Main navigation", "Основная навигация", "Navegación principal", "Navigation principale", "Hauptnavigation"],
   ["profile", "Profile", "Профиль", "Perfil", "Profil", "Profil"],
@@ -170,6 +179,8 @@ const messages = Object.fromEntries([
 ].map(([key, en, ru, es, fr, de]) => [key, { en, ru, es, fr, de }]));
 
 let locale = (() => {
+  const requested = new URLSearchParams(window.location.search).get("lang");
+  if (LANGUAGES.includes(requested)) return requested;
   try {
     const saved = localStorage.getItem(LANGUAGE_KEY);
     if (LANGUAGES.includes(saved)) return saved;
@@ -222,40 +233,20 @@ const formatTime = (value) => {
     .format(new Date(2000, 0, 1, hours, minutes));
 };
 
-function starterData() {
-  return {
-    pets: [
-      { id: "milo", name: "Milo", species: "Dog", breed: "Golden retriever", birthday: "2021-05-14", weight: "28", notes: "", color: "#f8e9d8" },
-      { id: "luna", name: "Luna", species: "Cat", breed: "British shorthair", birthday: "2022-09-02", weight: "4.6", notes: "", color: "#e7edf4" }
-    ],
-    medications: [
-      { id: "med1", petId: "milo", name: "Joint support", dose: "1 chew · with breakfast", time: "08:00", schedule: "Daily", startDate: dayOffset(-30), active: true },
-      { id: "med2", petId: "milo", name: "Omega-3 oil", dose: "1 pump · with food", time: "18:30", schedule: "Daily", startDate: dayOffset(-12), active: true },
-      { id: "med3", petId: "luna", name: "Dental gel", dose: "Small amount · brush gently", time: "20:00", schedule: "Daily", startDate: dayOffset(-18), active: true }
-    ],
-    vaccinations: [
-      { id: "vac1", petId: "milo", name: "Rabies booster", date: dayOffset(-80), nextDate: dayOffset(12), clinic: "Greenwood Animal Clinic", notes: "" },
-      { id: "vac2", petId: "milo", name: "DHPP", date: dayOffset(-160), nextDate: dayOffset(38), clinic: "Greenwood Animal Clinic", notes: "" },
-      { id: "vac3", petId: "luna", name: "FVRCP", date: dayOffset(-100), nextDate: dayOffset(24), clinic: "Oak & Paws Vet", notes: "" }
-    ],
-    grooming: [
-      { id: "groom1", petId: "milo", name: "Bath & brush", date: dayOffset(-18), nextDate: dayOffset(10), provider: "The Fluffy Club", notes: "" },
-      { id: "groom2", petId: "luna", name: "Nail trim", date: dayOffset(-26), nextDate: dayOffset(18), provider: "At home", notes: "" }
-    ],
-    completions: {}
-  };
+function emptyData() {
+  return { pets: [], medications: [], vaccinations: [], grooming: [], completions: {} };
 }
 
 function loadData() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return starterData();
+    if (!saved) return emptyData();
     const parsed = JSON.parse(saved);
-    if (!Array.isArray(parsed.pets) || !Array.isArray(parsed.medications)) return starterData();
-    return { ...starterData(), ...parsed };
+    if (!Array.isArray(parsed.pets) || !Array.isArray(parsed.medications)) return emptyData();
+    return { ...emptyData(), ...parsed };
   } catch (error) {
     console.error("Could not load My Pet records:", error);
-    return starterData();
+    return emptyData();
   }
 }
 
@@ -274,7 +265,17 @@ function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
+function updateLanguageUrl() {
+  if (window.location.protocol !== "http:" && window.location.protocol !== "https:") return;
+  const url = new URL(window.location.href);
+  if (url.searchParams.get("lang") !== locale) {
+    url.searchParams.set("lang", locale);
+    window.history.replaceState(window.history.state, "", url);
+  }
+}
+
 function applyTranslations() {
+  updateLanguageUrl();
   document.documentElement.lang = LOCALE_TAGS[locale].slice(0, 2);
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.dataset.i18n;
@@ -285,8 +286,23 @@ function applyTranslations() {
     if (messages[key]) element.setAttribute("aria-label", t(key));
   });
   byId("language-picker").value = locale;
-  document.getElementById("app-description").content = t("metaDescription");
-  document.title = `My Pet — ${locale === "ru" ? "забота каждый день" : locale === "es" ? "cuidamos cada día" : locale === "fr" ? "prendre soin chaque jour" : locale === "de" ? "liebevolle Pflege jeden Tag" : "thoughtful care, every day"}`;
+  const title = t("metaTitle");
+  const description = t("metaDescription");
+  const localizedUrl = new URL(PUBLIC_SITE_URL);
+  localizedUrl.searchParams.set("lang", locale);
+  document.title = title;
+  document.getElementById("app-description").content = description;
+  document.querySelector('link[rel="canonical"]').href = localizedUrl.href;
+  document.querySelector('meta[property="og:title"]').content = title;
+  document.querySelector('meta[property="og:description"]').content = description;
+  document.querySelector('meta[property="og:url"]').content = localizedUrl.href;
+  document.querySelector('meta[property="og:locale"]').content = SOCIAL_LOCALES[locale];
+  const alternateLocales = LANGUAGES.filter((language) => language !== locale).map((language) => SOCIAL_LOCALES[language]);
+  document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((meta, index) => {
+    meta.content = alternateLocales[index];
+  });
+  document.querySelector('meta[name="twitter:title"]').content = title;
+  document.querySelector('meta[name="twitter:description"]').content = description;
   render();
 }
 
@@ -419,6 +435,11 @@ function renderMedications() {
 }
 
 function render() {
+  const firstRun = data.pets.length === 0;
+  byId("first-run").hidden = !firstRun || currentView !== "overview";
+  document.querySelectorAll(".main-nav .nav-link").forEach((button) => {
+    button.hidden = firstRun && (button.dataset.view === "medications" || button.dataset.view === "records");
+  });
   setHeader();
   renderPets();
   renderStats();
@@ -434,14 +455,14 @@ function render() {
   byId("page-subtitle").textContent = currentView === "overview"
     ? selectedPet() ? t("overviewSubtitle", { pet: selectedPet().name }) : t("noPetSubtitle")
     : currentView === "records" ? t("recordsSubtitle") : currentView === "medications" ? t("medicationsSubtitle") : t("howUseIntro");
-  byId("overview-section").hidden = currentView !== "overview";
-  byId("overview-content").hidden = currentView !== "overview";
+  byId("overview-section").hidden = currentView !== "overview" || firstRun;
+  byId("overview-content").hidden = currentView !== "overview" || firstRun;
   byId("records-section").hidden = currentView !== "records";
   byId("medications-section").hidden = currentView !== "medications";
   byId("guide-section").hidden = currentView !== "guide";
-  byId("page-heading").hidden = currentView === "guide";
-  byId("pet-hero").hidden = currentView === "guide";
-  byId("add-care-button").hidden = currentView !== "overview";
+  byId("page-heading").hidden = currentView === "guide" || firstRun;
+  byId("pet-hero").hidden = currentView === "guide" || firstRun;
+  byId("add-care-button").hidden = currentView !== "overview" || firstRun;
 }
 
 function field(label, name, type = "text", value = "", options = {}) {
@@ -579,4 +600,5 @@ byId("entry-dialog").addEventListener("click", (event) => {
 });
 
 byId("language-picker").addEventListener("change", (event) => setLocale(event.target.value));
+byId("onboarding-add-pet").addEventListener("click", () => openDialog("pet"));
 applyTranslations();

@@ -4,11 +4,43 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f7f2">
-    <title>My Pet — thoughtful care, every day</title>
-    <meta id="app-description" name="description" content="All your pet's medications, vaccinations, and grooming in one caring, easy-to-use place.">
-    <meta property="og:title" content="My Pet — thoughtful care, every day">
-    <meta property="og:description" content="A calm, colorful care hub for pets and the people who love them.">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <title>My Pet — thoughtful pet care, every day</title>
+    <meta id="app-description" name="description" content="Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.">
+    <link rel="canonical" href="https://tatiana8888.github.io/my-pet/?lang=en">
+    <link rel="alternate" hreflang="en" href="https://tatiana8888.github.io/my-pet/?lang=en">
+    <link rel="alternate" hreflang="ru" href="https://tatiana8888.github.io/my-pet/?lang=ru">
+    <link rel="alternate" hreflang="es" href="https://tatiana8888.github.io/my-pet/?lang=es">
+    <link rel="alternate" hreflang="fr" href="https://tatiana8888.github.io/my-pet/?lang=fr">
+    <link rel="alternate" hreflang="de" href="https://tatiana8888.github.io/my-pet/?lang=de">
+    <link rel="alternate" hreflang="x-default" href="https://tatiana8888.github.io/my-pet/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="My Pet">
+    <meta property="og:title" content="My Pet — thoughtful pet care, every day">
+    <meta property="og:description" content="Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.">
     <meta property="og:image" content="https://tatiana8888.github.io/my-pet/assets/hero-pets.svg">
+    <meta property="og:image:alt" content="A cheerful illustration of a dog and a cat">
+    <meta property="og:url" content="https://tatiana8888.github.io/my-pet/?lang=en">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ru_RU">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="de_DE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Pet — thoughtful pet care, every day">
+    <meta name="twitter:description" content="Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.">
+    <meta name="twitter:image" content="https://tatiana8888.github.io/my-pet/assets/hero-pets.svg">
+    <meta name="twitter:image:alt" content="A cheerful illustration of a dog and a cat">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "My Pet",
+        "url": "https://tatiana8888.github.io/my-pet/",
+        "description": "A private, multilingual space to organize a pet's medications, vaccinations, and grooming.",
+        "inLanguage": ["en-US", "ru-RU", "es-ES", "fr-FR", "de-DE"]
+      }
+    </script>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +55,7 @@
           <span>my<span class="brand-highlight">pet</span></span>
         </a>
         <div class="side-label" data-i18n="yourSpace">YOUR SPACE</div>
-        <nav class="main-nav" aria-label="Main navigation" data-i18n-aria="mainNavigation">
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation" data-i18n-aria="mainNavigation">
           <button class="nav-link active" data-view="overview"><span class="nav-icon">⌂</span><span data-i18n="overview">Overview</span></button>
           <button class="nav-link" data-view="medications"><span class="nav-icon">✚</span><span data-i18n="medications">Medications</span><span class="nav-count" id="med-count">0</span></button>
           <button class="nav-link" data-view="records"><span class="nav-icon">♡</span><span data-i18n="healthRecords">Health records</span></button>
@@ -60,6 +92,29 @@
           </div>
         </header>
         <div class="page-wrap">
+          <section class="onboarding" id="first-run" hidden aria-labelledby="onboarding-title">
+            <div class="onboarding-hero">
+              <div class="onboarding-copy">
+                <p class="eyebrow" data-i18n="onboardingEyebrow">A FRESH START FOR YOUR FAMILY</p>
+                <h1 id="onboarding-title" data-i18n="onboardingTitle">A happier care routine starts with your pet.</h1>
+                <p class="onboarding-description" data-i18n="onboardingDescription">Create a profile to keep medications, vaccinations, and grooming dates in one calm, easy-to-use place.</p>
+                <p class="onboarding-language-hint" data-i18n="onboardingLanguageHint">Choose your language above, then add your first pet to get started.</p>
+                <div class="onboarding-actions">
+                  <button class="primary-button" id="onboarding-add-pet"><span>+</span><span data-i18n="addFirstPet">Add your first pet</span></button>
+                  <button class="secondary-button" data-view="guide" data-i18n="onboardingGuide">See how it works</button>
+                </div>
+              </div>
+              <img src="assets/care-guide.svg" alt="" width="440" height="290">
+            </div>
+            <div class="onboarding-steps">
+              <h2 data-i18n="smallSteps">A FEW SMALL STEPS</h2>
+              <div class="steps-grid">
+                <article class="step-card"><span class="step-number">01</span><img src="assets/step-profile.svg" alt="" width="112" height="92"><h3 data-i18n="stepOneTitle">Add your pet</h3><p data-i18n="stepOneText">Create a profile for each furry family member. Switch pets anytime.</p></article>
+                <article class="step-card"><span class="step-number">02</span><img src="assets/step-medication.svg" alt="" width="112" height="92"><h3 data-i18n="stepTwoTitle">Set a care routine</h3><p data-i18n="stepTwoText">Add medicine and its schedule, then tap the check when a dose is given.</p></article>
+                <article class="step-card"><span class="step-number">03</span><img src="assets/step-records.svg" alt="" width="112" height="92"><h3 data-i18n="stepThreeTitle">Keep dates close</h3><p data-i18n="stepThreeText">Save vaccine and grooming visits. Upcoming dates appear on your home screen.</p></article>
+              </div>
+            </div>
+          </section>
           <section class="page-heading" id="page-heading">
             <div>
               <p class="eyebrow" id="greeting">A GOOD DAY TOGETHER</p>

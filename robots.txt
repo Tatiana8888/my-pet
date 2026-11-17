@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tatiana8888.github.io/my-pet/sitemap.xml
