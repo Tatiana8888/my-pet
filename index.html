@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f5f7f2">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <title>My Pet — thoughtful pet care, every day</title>
-    <meta id="app-description" name="description" content="Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.">
+    <meta id="app-description" name="description" content="Manage medications, vaccinations, deworming, weight, meals, grooming, and pet documents in one private care hub.">
     <link rel="canonical" href="https://tatiana8888.github.io/my-pet/?lang=en">
     <link rel="alternate" hreflang="en" href="https://tatiana8888.github.io/my-pet/?lang=en">
     <link rel="alternate" hreflang="ru" href="https://tatiana8888.github.io/my-pet/?lang=ru">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="My Pet">
     <meta property="og:title" content="My Pet — thoughtful pet care, every day">
-    <meta property="og:description" content="Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.">
+    <meta property="og:description" content="Manage medications, vaccinations, deworming, weight, meals, grooming, and pet documents in one private care hub.">
     <meta property="og:image" content="https://tatiana8888.github.io/my-pet/assets/hero-pets.svg">
     <meta property="og:image:alt" content="A cheerful illustration of a dog and a cat">
     <meta property="og:url" content="https://tatiana8888.github.io/my-pet/?lang=en">
@@ -28,7 +28,7 @@
     <meta property="og:locale:alternate" content="de_DE">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="My Pet — thoughtful pet care, every day">
-    <meta name="twitter:description" content="Keep your pet's medication schedules, vaccination records, and grooming dates together in one simple, private care hub.">
+    <meta name="twitter:description" content="Manage medications, vaccinations, deworming, weight, meals, grooming, and pet documents in one private care hub.">
     <meta name="twitter:image" content="https://tatiana8888.github.io/my-pet/assets/hero-pets.svg">
     <meta name="twitter:image:alt" content="A cheerful illustration of a dog and a cat">
     <script type="application/ld+json">
@@ -37,7 +37,7 @@
         "@type": "WebSite",
         "name": "My Pet",
         "url": "https://tatiana8888.github.io/my-pet/",
-        "description": "A private, multilingual space to organize a pet's medications, vaccinations, and grooming.",
+        "description": "A private, multilingual space to organize a pet's medications, vaccinations, deworming, weight, meals, grooming, and documents.",
         "inLanguage": ["en-US", "ru-RU", "es-ES", "fr-FR", "de-DE"]
       }
     </script>
@@ -165,10 +165,98 @@
           <section class="panel records-panel" id="records-section" hidden>
             <div class="panel-heading records-header">
               <div><p class="eyebrow" data-i18n="visitMilestones">EVERY VISIT, EVERY MILESTONE</p><h3 data-i18n="healthRecords">Health records</h3><p class="panel-description" data-i18n="recordsDescription">Vaccinations and grooming, thoughtfully kept together.</p></div>
-              <div class="record-actions"><button class="secondary-button" data-add-type="vaccination"><span data-i18n="addVaccination">+ Vaccination</span></button><button class="secondary-button" data-add-type="grooming"><span data-i18n="addGrooming">+ Grooming</span></button></div>
+              <div class="record-actions" id="record-actions">
+                <button class="secondary-button" data-add-type="vaccination"><span data-i18n="addVaccination">+ Vaccination</span></button>
+                <button class="secondary-button" data-add-type="deworming"><span data-i18n="addDeworming">+ Deworming</span></button>
+                <button class="secondary-button" data-add-type="grooming"><span data-i18n="addGrooming">+ Grooming</span></button>
+                <details class="record-add-menu">
+                  <summary class="secondary-button" data-i18n="moreHealthEntries">More entries</summary>
+                  <div class="record-add-options">
+                    <button type="button" data-add-type="weight"><span data-i18n="addWeight">+ Weight</span></button>
+                    <button type="button" data-add-type="food"><span data-i18n="addFoodEntry">+ Food diary</span></button>
+                    <button type="button" data-add-type="document"><span data-i18n="addDocument">+ Document</span></button>
+                  </div>
+                </details>
+              </div>
             </div>
-            <div class="record-tabs"><button class="record-tab active" data-record-tab="all" data-i18n="allRecords">All records</button><button class="record-tab" data-record-tab="vaccination" data-i18n="vaccinations">Vaccinations</button><button class="record-tab" data-record-tab="grooming" data-i18n="grooming">Grooming</button></div>
+            <div class="record-tabs" aria-label="Health card categories" data-i18n-aria="healthCardTabs">
+              <button class="record-tab active" data-record-tab="all" data-i18n="allRecords">All records</button>
+              <button class="record-tab" data-record-tab="vaccination" data-i18n="vaccinations">Vaccinations</button>
+              <button class="record-tab" data-record-tab="deworming" data-i18n="deworming">Deworming</button>
+              <button class="record-tab" data-record-tab="weight" data-i18n="weight">Weight</button>
+              <button class="record-tab" data-record-tab="food" data-i18n="foodDiary">Food diary</button>
+              <button class="record-tab" data-record-tab="document" data-i18n="documents">Documents</button>
+              <button class="record-tab" data-record-tab="grooming" data-i18n="grooming">Grooming</button>
+              <button class="record-tab" data-record-tab="vet" data-i18n="vetPrep">Vet visit prep</button>
+            </div>
+            <section id="document-actions" class="document-actions" hidden>
+              <p class="eyebrow" data-i18n="documentToolsTitle">Pet documents</p>
+              <div class="document-action-buttons">
+                <button class="secondary-button" id="download-passport" type="button" data-i18n="downloadPetPassport">Download pet passport</button>
+                <button class="secondary-button" id="print-schedule" type="button" data-i18n="printTreatmentSchedule">Print treatment schedule</button>
+                <button class="secondary-button" id="save-medical-summary" type="button" data-i18n="saveMedicalSummary">Save medical summary</button>
+              </div>
+              <p class="document-export-note" data-i18n="passportDisclaimer">A personal care summary, not an official travel or vaccination certificate.</p>
+            </section>
+            <p class="documents-local-note" id="document-storage-note" data-i18n="documentsLocalOnly" hidden>Files are stored privately on this device.</p>
             <div id="records-list" class="records-list"></div>
+            <section id="vet-assistant" class="vet-assistant" hidden>
+              <div class="vet-intro">
+                <p class="eyebrow" data-i18n="vetAssistantTitle">Vet visit preparation</p>
+                <p data-i18n="vetAssistantIntro">Organize what you have noticed and prepare a clear message for your clinic.</p>
+                <p class="vet-disclaimer" data-i18n="vetAssistantDisclaimer">This local guided helper uses a checklist and message template. It is not a live AI, a diagnosis, or veterinary advice.</p>
+                <p class="vet-disclaimer" data-i18n="vetAssistantPrivacy">Your notes stay on this device. A share button only opens a draft in the chosen messenger; review it and press Send there.</p>
+              </div>
+              <aside class="vet-urgent">
+                <strong data-i18n="vetUrgentTitle">When to contact an emergency veterinarian</strong>
+                <p data-i18n="vetUrgentText">Seek emergency veterinary help now for difficulty breathing, collapse, seizures, unresponsiveness, severe bleeding, repeated vomiting, or inability to urinate.</p>
+              </aside>
+              <div class="vet-workspace">
+                <form id="vet-report-form" class="vet-form">
+                  <label class="field full"><span data-i18n="vetSymptomsLabel">What have you noticed?</span><textarea name="symptoms" maxlength="2000" required placeholder="For example: cat, temperature 39.8 °C, lethargic, not eating" data-i18n-placeholder="vetSymptomsPlaceholder"></textarea></label>
+                  <div class="vet-form-grid">
+                    <label class="field"><span data-i18n="symptomOnset">When did this start?</span><input name="onset" type="datetime-local" required></label>
+                    <label class="field"><span data-i18n="temperatureC">Temperature (°C)</span><input name="temperature" type="number" step="0.1" inputmode="decimal"></label>
+                    <label class="field"><span data-i18n="temperatureTime">When was it measured?</span><input name="temperatureTime" type="datetime-local"></label>
+                    <label class="field"><span data-i18n="appetite">Appetite</span><select name="appetite"><option value="unknown" data-i18n="unknown">Not noted</option><option value="normal" data-i18n="appetiteNormal">Eating as usual</option><option value="reduced" data-i18n="appetiteReduced">Eating less</option><option value="none" data-i18n="appetiteNone">Not eating</option></select></label>
+                    <label class="field"><span data-i18n="waterIntake">Water intake</span><select name="water"><option value="unknown" data-i18n="unknown">Not noted</option><option value="normal" data-i18n="waterNormal">Drinking as usual</option><option value="less" data-i18n="waterLess">Drinking less</option><option value="more" data-i18n="waterMore">Drinking more</option><option value="none" data-i18n="waterNone">Not drinking</option></select></label>
+                  </div>
+                  <details class="vet-observations">
+                    <summary data-i18n="moreObservations">Add other observations</summary>
+                    <div class="vet-form-grid">
+                      <label class="field"><span data-i18n="activityBehavior">Energy and behavior</span><textarea name="behavior" maxlength="500"></textarea></label>
+                      <label class="field"><span data-i18n="otherSymptoms">Vomiting, stool, or breathing changes</span><textarea name="otherSigns" maxlength="500"></textarea></label>
+                      <label class="field full"><span data-i18n="medicationExposure">Current medicines, new foods, or possible exposures</span><textarea name="exposures" maxlength="700"></textarea></label>
+                    </div>
+                  </details>
+                  <button class="primary-button" type="submit"><span data-i18n="prepareMessage">Prepare vet message</span></button>
+                </form>
+                <aside class="vet-checklist">
+                  <h4 data-i18n="vetObservationTitle">What to note for the veterinarian</h4>
+                  <ul><li data-i18n="vetObserveOnset">When each sign began and how it has changed</li><li data-i18n="vetObserveTemperature">Measured temperature, unit, time, and how it was measured</li><li data-i18n="vetObserveAppetiteWater">Eating and drinking compared with usual</li><li data-i18n="vetObserveBehavior">Energy, behavior, breathing, vomiting, and stool</li><li data-i18n="vetObserveMedsExposure">Medicines, supplements, new foods, and possible exposures</li></ul>
+                  <h4 data-i18n="vetAskTitle">Questions to ask the clinic</h4>
+                  <ul><li data-i18n="vetAskOne">How soon should my pet be examined based on these signs?</li><li data-i18n="vetAskTwo">Which changes would mean I should seek urgent care?</li><li data-i18n="vetAskThree">What observations or records should I bring or continue tracking?</li><li data-i18n="vetAskFour">Are any examination or follow-up steps recommended for my pet?</li></ul>
+                </aside>
+              </div>
+              <section id="vet-result" class="vet-result" aria-live="polite" hidden>
+                <h4 data-i18n="vetMessageTitle">Message for your veterinarian</h4>
+                <textarea id="vet-message" readonly rows="10"></textarea>
+                <div class="vet-result-actions">
+                  <button class="secondary-button" id="copy-vet-message" type="button" data-i18n="copyMessage">Copy message</button>
+                  <button class="secondary-button" id="save-vet-report" type="button" data-i18n="saveVetReport">Save to health card</button>
+                </div>
+                <p class="vet-share-note" data-i18n="sharePrompt">Choose a messenger. It opens a draft; review it and send it yourself.</p>
+                <div class="vet-share-actions">
+                  <a id="share-whatsapp" target="_blank" rel="noopener noreferrer" data-i18n="shareWhatsApp">WhatsApp</a>
+                  <a id="share-telegram" target="_blank" rel="noopener noreferrer" data-i18n="shareTelegram">Telegram</a>
+                  <a id="share-max" target="_blank" rel="noopener noreferrer" data-i18n="shareMax">MAX</a>
+                </div>
+              </section>
+              <section class="vet-history">
+                <h4 data-i18n="savedVetReports">Saved vet-prep notes</h4>
+                <div id="vet-history-list"></div>
+              </section>
+            </section>
           </section>
 
           <section class="panel medications-panel" id="medications-section" hidden>
@@ -198,8 +286,9 @@
             </div>
             <div class="features-grid">
               <article class="feature-card"><span class="feature-icon mint">✚</span><div><h4 data-i18n="featureMedsTitle">Medication, made manageable</h4><p data-i18n="featureMedsText">See each dose, follow the daily routine, and keep a simple completion history.</p></div></article>
-              <article class="feature-card"><span class="feature-icon sky">♡</span><div><h4 data-i18n="featureRecordsTitle">Every important record</h4><p data-i18n="featureRecordsText">Keep vaccinations, clinic details, and grooming visits together by pet.</p></div></article>
-              <article class="feature-card"><span class="feature-icon peach">◷</span><div><h4 data-i18n="featureRemindersTitle">A heads-up before it's due</h4><p data-i18n="featureRemindersText">See upcoming vaccination and grooming dates at a glance. No account needed.</p></div></article>
+              <article class="feature-card"><span class="feature-icon sky">♡</span><div><h4 data-i18n="featureRecordsTitle">Every important record</h4><p data-i18n="featureRecordsText">Keep vaccinations, deworming, weight history, meals, grooming, and documents together by pet.</p></div></article>
+              <article class="feature-card"><span class="feature-icon peach">◷</span><div><h4 data-i18n="featureRemindersTitle">A heads-up before it's due</h4><p data-i18n="featureRemindersText">See upcoming vaccination, deworming, and grooming dates at a glance. No account needed.</p></div></article>
+              <article class="feature-card"><span class="feature-icon mint">✉</span><div><h4 data-i18n="featureVetPrepTitle">A clearer vet conversation</h4><p data-i18n="featureVetPrepText">Organize observations and questions into a message for your clinic. No diagnosis or treatment advice.</p></div></article>
             </div>
             <div class="privacy-note"><span>✦</span><p><strong data-i18n="privacyTitle">Your pet's care stays yours.</strong><br><span data-i18n="privacyText">This app keeps records in your browser or Android device. It doesn't send them to a server.</span></p></div>
           </section>
@@ -218,7 +307,16 @@
         <div class="dialog-actions"><button type="button" class="secondary-button cancel-dialog" data-i18n="cancel">Cancel</button><button type="submit" class="primary-button" data-i18n="saveRecord">Save record</button></div>
       </form>
     </dialog>
+    <dialog id="document-dialog" class="document-dialog">
+      <div class="dialog-top">
+        <div><p class="eyebrow" data-i18n="documents">Documents</p><h2 id="document-view-title"></h2></div>
+        <button type="button" class="icon-button close-document-dialog" aria-label="Close dialog" data-i18n-aria="closeDialog">×</button>
+      </div>
+      <div id="document-preview" class="document-preview"></div>
+      <div class="dialog-actions"><a id="document-download" class="secondary-button" download><span data-i18n="downloadDocument">Download file</span></a><button type="button" id="open-native-document" class="secondary-button" data-i18n="openExternalDocument" hidden>Open in another app</button><button type="button" class="secondary-button close-document-dialog" data-i18n="close">Close</button></div>
+    </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <section id="print-sheet" hidden></section>
     <script src="app.js"></script>
   </body>
 </html>

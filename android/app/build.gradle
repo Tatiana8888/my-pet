@@ -32,6 +32,10 @@ android {
     }
 }
 
+dependencies {
+    implementation "androidx.core:core:1.13.1"
+}
+
 tasks.register("copyWebApp", Sync) {
     from(rootProject.projectDir.parentFile) {
         include "index.html", "app.js", "styles.css"

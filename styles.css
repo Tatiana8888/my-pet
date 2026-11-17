@@ -133,6 +133,7 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
 .care-symbol { width: 31px; height: 31px; flex: 0 0 31px; display: grid; place-items: center; border-radius: 9px; background: #eef4ed; color: #66836b; font-size: 14px; }
 .care-symbol.medicine { background: #fbf0e6; color: #d09464; }
 .care-symbol.vaccine { background: #eaf2f4; color: #7195a4; }
+.care-symbol.deworming { background: #f5f1e7; color: #a38a55; }
 .care-copy { flex: 1; min-width: 0; }
 .care-copy strong { display: block; font-size: 9px; font-weight: 700; }
 .care-copy span { display: block; margin-top: 3px; color: #98a39c; font-size: 8px; }
@@ -172,14 +173,22 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
 .records-panel, .medications-panel { margin-top: 2px; }
 .records-header { align-items: flex-start; margin-bottom: 19px; }
 .panel-description { margin: 6px 0 0; font-size: 9px; color: #8d9992; }
-.record-actions { display: flex; gap: 7px; }
+.record-actions { display: flex; align-items: flex-start; justify-content: flex-end; gap: 7px; flex-wrap: wrap; }
 .secondary-button { border: 1px solid #e4e9e3; color: #64746a; background: #fff; border-radius: 7px; padding: 9px 12px; font-size: 9px; font-weight: 600; }
 .secondary-button:hover { background: #f7f9f6; }
-.record-tabs { display: flex; gap: 17px; border-bottom: 1px solid var(--line); margin-bottom: 3px; }
+.secondary-button:disabled { cursor: not-allowed; opacity: .55; }
+.record-add-menu { position: relative; }
+.record-add-menu summary { list-style: none; cursor: pointer; white-space: nowrap; }
+.record-add-menu summary::-webkit-details-marker { display: none; }
+.record-add-options { position: absolute; z-index: 4; top: calc(100% + 5px); right: 0; min-width: 150px; padding: 5px; display: grid; gap: 2px; border: 1px solid var(--line); border-radius: 9px; background: #fff; box-shadow: 0 10px 24px #263a361c; }
+.record-add-options button { border: 0; border-radius: 6px; padding: 8px 10px; color: var(--ink); background: transparent; text-align: left; font-size: 9px; white-space: nowrap; }
+.record-add-options button:hover { background: #f4f7f2; }
+.record-tabs { display: flex; gap: 17px; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 3px; scrollbar-width: thin; }
 .record-tab { position: relative; padding: 0 1px 11px; border: 0; background: transparent; color: #9aa59e; font-size: 9px; }
+.record-tab { flex: 0 0 auto; white-space: nowrap; }
 .record-tab.active { color: var(--green); font-weight: 700; }
 .record-tab.active:after { position: absolute; content: ""; height: 2px; left: 0; right: 0; bottom: -1px; background: var(--green); border-radius: 2px; }
-.record-row { display: grid; grid-template-columns: 36px minmax(100px, 1fr) 120px 120px; align-items: center; gap: 12px; min-height: 66px; border-bottom: 1px solid #f1f3f0; }
+.record-row { display: grid; grid-template-columns: 36px minmax(100px, 1fr) 100px minmax(100px, auto); align-items: center; gap: 12px; min-height: 66px; border-bottom: 1px solid #f1f3f0; }
 .record-row:last-child { border-bottom: 0; }
 .record-icon { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; background: #eaf2f4; color: #7394a1; }
 .record-icon.grooming { background: #fbf0e6; color: #c38a60; }
@@ -187,6 +196,51 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
 .record-main span, .record-meta span { display: block; margin-top: 4px; color: #99a49d; font-size: 8px; }
 .record-tag { color: #69826e; background: #edf4ec; justify-self: start; border-radius: 10px; padding: 5px 8px; font-size: 7px; }
 .record-tag.past { color: #89958e; background: #f5f6f4; }
+.record-trailing { display: flex; align-items: center; justify-self: end; gap: 5px; }
+.record-icon.deworming { background: #f5f1e7; color: #a38a55; }
+.record-icon.weight { background: #eaf3ea; color: #66836b; }
+.record-icon.food { background: #fbf0e5; color: #c9875b; }
+.record-icon.document { background: #f1edf6; color: #8c79a5; }
+.record-icon.vet { background: #f9eded; color: #b17571; }
+.record-tool { border: 0; padding: 5px 7px; border-radius: 6px; color: var(--green-dark); background: #edf4ed; font-size: 8px; white-space: nowrap; }
+.documents-local-note { margin: 8px 0; color: #849188; font-size: 9px; }
+.document-actions { margin: 10px 0 13px; padding: 12px; border: 1px solid #edf0ec; border-radius: 9px; background: #f9faf7; }
+.document-actions .eyebrow { margin-bottom: 8px; }
+.document-action-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.document-export-note { margin: 8px 0 0; color: #8a9690; font-size: 8px; line-height: 1.5; }
+.document-text-preview { width: 100%; max-height: 65vh; margin: 0; padding: 16px; overflow: auto; color: #43544a; font: 10px/1.6 "DM Sans", sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+.vet-assistant { padding-top: 20px; }
+.vet-intro { max-width: 760px; }
+.vet-intro > p:not(.eyebrow) { margin: 0 0 8px; color: #728078; font-size: 10px; line-height: 1.65; }
+.vet-intro .eyebrow { color: #61806b; }
+.vet-intro .vet-disclaimer { color: #8a9690; font-size: 9px; }
+.vet-urgent { margin: 14px 0 18px; padding: 12px 15px; border-left: 3px solid #c47770; border-radius: 8px; background: #fbefec; color: #72504b; }
+.vet-urgent strong { display: block; margin-bottom: 5px; font-size: 10px; }
+.vet-urgent p { margin: 0; font-size: 9px; line-height: 1.6; }
+.vet-workspace { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr); gap: 16px; align-items: start; }
+.vet-form, .vet-checklist { min-width: 0; padding: 16px; border: 1px solid #edf0ec; border-radius: 10px; background: #fff; }
+.vet-form { display: grid; gap: 12px; }
+.vet-form .field { min-width: 0; }
+.vet-form .field textarea { min-height: 76px; line-height: 1.5; }
+.vet-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+.vet-observations { border-top: 1px solid var(--line); padding-top: 10px; }
+.vet-observations summary { color: var(--green); cursor: pointer; font-size: 9px; font-weight: 700; }
+.vet-observations .vet-form-grid { margin-top: 12px; }
+.vet-checklist h4, .vet-history h4, .vet-result h4 { margin: 0 0 9px; color: #44564b; font: 700 11px Manrope, sans-serif; }
+.vet-checklist ul { margin: 0 0 17px; padding-left: 16px; color: #7f8c84; font-size: 9px; line-height: 1.7; }
+.vet-checklist ul:last-child { margin-bottom: 0; }
+.vet-result, .vet-history { margin-top: 18px; padding: 16px; border: 1px solid #edf0ec; border-radius: 10px; background: #fff; }
+#vet-message { display: block; width: 100%; resize: vertical; border: 1px solid #e6ebe5; border-radius: 8px; padding: 12px; color: #43544a; background: #fbfcfa; font: 10px/1.6 "DM Sans", sans-serif; }
+.vet-result-actions, .vet-share-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.vet-share-note { margin: 14px 0 0; color: #829088; font-size: 9px; }
+.vet-share-actions a { display: inline-flex; align-items: center; padding: 8px 12px; border: 1px solid #e4e9e3; border-radius: 7px; color: var(--green-dark); background: #f7f9f6; font-size: 9px; font-weight: 700; text-decoration: none; }
+.vet-share-actions a:hover { background: #edf4ed; }
+.vet-history-item { position: relative; border-top: 1px solid #f1f3f0; padding: 9px 28px 9px 0; }
+.vet-history-item summary { display: flex; flex-wrap: wrap; gap: 8px; color: #738078; cursor: pointer; font-size: 9px; }
+.vet-history-item summary strong { color: #55665b; white-space: nowrap; }
+.vet-history-item pre { margin: 10px 0 0; color: #6f7c74; font: 9px/1.6 "DM Sans", sans-serif; white-space: pre-wrap; overflow-wrap: anywhere; }
+.vet-history-item > .delete-entry { position: absolute; top: 5px; right: 0; }
+.vet-history .empty-state { margin: 0; }
 .med-summary { display: flex; gap: 9px; margin: 0 0 14px; }
 .med-summary-card { flex: 1; padding: 12px 14px; background: #f8f9f6; border-radius: 9px; }
 .med-summary-card strong { display: block; font: 700 15px Manrope, sans-serif; }
@@ -202,6 +256,14 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
 .toast { position: fixed; bottom: 22px; left: 50%; z-index: 5; transform: translate(-50%, 15px); opacity: 0; pointer-events: none; padding: 11px 17px; border-radius: 9px; color: #fff; background: #304c3f; box-shadow: 0 8px 22px #1e35292e; font-size: 10px; transition: opacity .2s, transform .2s; }
 .toast.show { transform: translate(-50%, 0); opacity: 1; }
 .entry-dialog { width: min(440px, calc(100vw - 28px)); border: 0; padding: 0; border-radius: 14px; color: var(--ink); box-shadow: 0 20px 70px #263a3633; }
+.document-dialog { width: min(850px, calc(100vw - 28px)); max-height: 90vh; overflow: auto; border: 0; padding: 22px; border-radius: 14px; color: var(--ink); box-shadow: 0 20px 70px #263a3633; }
+.document-dialog::backdrop { background: #28393270; backdrop-filter: blur(2px); }
+.document-dialog .dialog-top { margin-bottom: 12px; }
+.document-dialog .dialog-top h2 { font-size: 16px; }
+.document-preview { min-height: 160px; display: grid; place-items: center; overflow: auto; border: 1px solid var(--line); border-radius: 9px; background: #f7f8f5; }
+.document-preview iframe { width: 100%; height: min(65vh, 680px); border: 0; }
+.document-preview img { display: block; max-width: 100%; max-height: 65vh; object-fit: contain; }
+.document-dialog .dialog-actions a { display: inline-flex; align-items: center; text-decoration: none; }
 .entry-dialog::backdrop { background: #28393270; backdrop-filter: blur(2px); }
 .entry-dialog form { padding: 24px; }
 .dialog-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
@@ -210,7 +272,7 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
 .dialog-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .field { display: grid; gap: 6px; }
 .field.full { grid-column: 1 / -1; }
-.field label { color: #69776f; font-size: 9px; font-weight: 600; }
+.field label, .field > span { color: #69776f; font-size: 9px; font-weight: 600; }
 .field input, .field select, .field textarea { width: 100%; min-width: 0; border: 1px solid #e6ebe5; outline: 0; border-radius: 7px; padding: 10px 10px; color: #43544a; background: #fff; font-size: 10px; }
 .field textarea { resize: vertical; min-height: 62px; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: #8caf96; box-shadow: 0 0 0 3px #8caf961b; }
@@ -332,6 +394,10 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
   .secondary-button { padding: 8px; }
   .med-summary { flex-direction: column; }
   .medication-card { padding: 12px 10px; gap: 8px; }
+  .vet-form, .vet-checklist { padding: 12px; }
+  .vet-form-grid { grid-template-columns: 1fr; }
+  .vet-result, .vet-history { padding: 12px; }
+  .document-action-buttons { display: grid; grid-template-columns: 1fr; }
   .medication-schedule { min-width: 65px; font-size: 7px; }
   .steps-grid { grid-template-columns: 1fr; gap: 8px; }
   .step-card { min-height: 148px; }
@@ -343,6 +409,26 @@ h3 { font-size: 14px; letter-spacing: -.25px; margin: 0; }
   .guide-hero > img { width: 36%; margin-right: -6px; }
   .guide-download { padding: 9px 10px; font-size: 8px; }
   .download-note { font-size: 7px; }
+}
+@media print {
+  @page { margin: 16mm; }
+  body { min-width: 0; background: #fff !important; }
+  body > :not(#print-sheet) { display: none !important; }
+  #print-sheet, #print-sheet[hidden] { position: absolute; inset: 0; display: block !important; width: 100%; padding: 0; color: #222; background: #fff; font: 11pt/1.5 Arial, sans-serif; }
+  #print-sheet h1 { margin: 0 0 8px; font-size: 21pt; }
+  #print-sheet h2 { margin: 20px 0 7px; border-bottom: 1px solid #bbb; padding-bottom: 4px; font-size: 13pt; }
+  #print-sheet p { margin: 4px 0; color: #555; }
+  #print-sheet ul { margin: 0; padding-left: 20px; }
+  #print-sheet li { margin: 5px 0; }
+  #print-sheet section { break-inside: avoid; }
+}
+@media (max-width: 760px) {
+  .record-actions { flex-direction: row; justify-content: flex-start; }
+  .record-row { grid-template-columns: 34px minmax(80px, 1fr) auto; gap: 8px; }
+  .record-trailing { max-width: 130px; flex-wrap: wrap; }
+  .record-tool { font-size: 7px; }
+  .document-dialog { padding: 16px; }
+  .vet-workspace { grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
   .onboarding-hero { min-height: 330px; }
